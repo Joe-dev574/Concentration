@@ -15,6 +15,7 @@ struct ContentView: View {
             CardView()
             CardView()
         }
+        .foregroundStyle(.orange)
         .padding(10)
     }
 }
