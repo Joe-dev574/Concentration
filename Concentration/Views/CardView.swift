@@ -15,23 +15,19 @@ struct CardView: View {
     var body: some View {
         ZStack(alignment: .center) {
             let base = RoundedRectangle(cornerRadius: 10)
-            if isFaceUp {
+            Group {
                 base.fill(Color.white)
                 base.strokeBorder(lineWidth: 2)
                 Text(content).font(.system(size: 60))
-
-            } else {
-                base.fill()
             }
+            .opacity(isFaceUp ? 1 : 0)
+            base.fill().opacity(isFaceUp ? 0 : 1)
         }
-        .foregroundStyle(.orange)
-        .padding(4)
         .onTapGesture {
             isFaceUp.toggle()
         }
     }
 }
-
 #Preview {
     CardView(isFaceUp: false, content: "👻")
 }

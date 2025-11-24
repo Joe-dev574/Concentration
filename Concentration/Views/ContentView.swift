@@ -18,13 +18,14 @@ struct ContentView: View {
     var body: some View {
         //MARK: BODY
         VStack {
-            Cards
+            ScrollView {
+                Cards
+            }
             Spacer()
             cardCountAdjuster
-
         }
-        .padding()
-        .font(.system(size: 45, weight: .bold, design: .default))
+        .padding(3)
+       
     }
 
     //MARK: CARDS VIEW
@@ -32,9 +33,11 @@ struct ContentView: View {
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 70))]) {
             ForEach(0..<cardCount, id: \.self) { index in
                 CardView(content: emojis[index])
+                    .aspectRatio(2/3, contentMode: .fit)
             }
-            .foregroundStyle(.orange)
+            
         }
+        .foregroundStyle(.orange)
     }
     //MARK: CARDCOUNT ADJUSTER VIEW
     var cardCountAdjuster: some View {
@@ -43,7 +46,8 @@ struct ContentView: View {
             Spacer()
             CardAdder
         }
-        .imageScale(.large)
+        .font(Font.largeTitle.bold())
+        .padding(.horizontal, 75)
     }
     //MARK: CARD ADJUST FUNC
     func cardCounterAdjuster(by offset: Int, symbol: String) -> some View {
